@@ -117,9 +117,6 @@ const styles = StyleSheet.create({
         height: 150,
         borderRadius: 100,
     },
-    textavtar: {
-        fontSize: 25
-    },
     applicationcreate: {
         marginTop: 5,
         justifyContent: 'center',

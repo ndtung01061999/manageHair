@@ -37,4 +37,15 @@ export function Onestorebooking(endpoint, method, body) {
         console.log(err);
     })
 }
-export default {Onestore,Onestoreservice,Onestorebooking}
+
+export function Onestorereport(endpoint, method, body) {
+    return axios({
+        method: method,
+        url: `${Config.API_URL}/store/report/${endpoint}`,
+        data: body
+    }).catch(err => {
+        console.log(err);
+    })
+}
+
+export default {Onestore,Onestoreservice,Onestorebooking,Onestorereport}

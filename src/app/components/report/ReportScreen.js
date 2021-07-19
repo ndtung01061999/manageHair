@@ -1,44 +1,43 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, Text, StyleSheet, SafeAreaView, FlatList, SegmentedControlIOS} from 'react-native';
 import ReportItem from './item/ReportItem';
-
-const data = [
-    {
-        'date':1,
-        'count':46
-    },
-    {
-        'date':2,
-        'count':30
-    },
-    {
-        'date':3,
-        'count':23
-    },
-    {
-        'date':4,
-        'count':25
-    },
-]
+import {Onestorereport} from '../../api/store/Onestore';
 const ReportScreen = () => {
-    console.log(new Date(2021,7,0).getDate()); //28
+    const [data,setData] =useState();
+    const [type,setType] =useState(1);
+    useEffect(() =>{
+        console.log(type);
+        Onestorereport(1, 'POST' , {
+            'type': type,
+            'date' : '2021-05-10'
+        }).then(res =>{
+            console.log(res);
+            setData(res.data)
+            console.log(res.data);
+        })
+    },[type])
     return (
         <View style={styles.container}>
             <SafeAreaView />
             <View style={{flexDirection:'row' ,justifyContent:'center'}}>
                 <SegmentedControlIOS
-                    values={['One', 'Two']}
+                    style={{width: 100, marginBottom: 30 ,justifyContent:'center',alignItems:'center'}}
+                    tintColor={'#FC6011'}
+                    values={['Ngày', 'Tháng']}
                     selectedIndex={0}
-                    onChange={(event) => {
-                        console.log(event.nativeEvent.selectedSegmentIndex);
+                    onChange={event => {
+                        setType(event.nativeEvent.selectedSegmentIndex+1);
                     }}
                 />
+            </View>
+            <View style={styles.calander}>
+                <Text>Tháng</Text>
             </View>
             <FlatList
                 data={data}
                 style={styles.list}
                 renderItem={({item}) => {
-                    return <ReportItem item={item} />;
+                    return <ReportItem item={item} type={type}/>;
                 }}
             />
         </View>
@@ -52,17 +51,11 @@ const styles = StyleSheet.create({
       flex: 1,
       justifyContent: 'center',
     },
-    button:{
-        width:50,
-        height: 25,
-        backgroundColor: '#ccc',
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginHorizontal: 5,
-        marginBottom: 20,
-        borderRadius: 10
+    calander:{
+        marginLeft: 30,
     },
     list:{
         marginLeft: 30,
-    }
+    },
+
 });
