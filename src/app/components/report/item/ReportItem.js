@@ -1,10 +1,10 @@
 import React from 'react';
 import {View, Text, StyleSheet, SafeAreaView, FlatList} from 'react-native';
-const ReportItem = ({item, type}) => {
+const ReportItem = ({item, type , monthactive}) => {
     return (
         <View style={{flexDirection: 'row' , marginBottom : 10, height: 30}}>
             <View style={{justifyContent:'center' , alignItems:'center'}}>
-                <Text>{type==2 ? 'Tháng' : null} {item.date} { type==1 ? '/7' : null }:</Text>
+                <Text>{type==2 ? 'Tháng' : null} {item.date} { type==1 ? `/${monthactive}` : null }:</Text>
             </View>
             <View style={[styles.total, {width: item.count * 10}]} />
             <View style={{justifyContent:'center' , alignItems:'center'}}>
