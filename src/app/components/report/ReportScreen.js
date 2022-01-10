@@ -26,11 +26,9 @@ const ReportScreen = () => {
         console.log(type);
         Onestorereport(1, 'POST' , {
             'type': type,
-            'date' : `2021-${monthactive}-10`
+            'date' : `2022-${monthactive}-10`
         }).then(res =>{
-            console.log(res);
             setData(res.data)
-            console.log(res.data);
         })
     },[type,monthactive])
     return (
